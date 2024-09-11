@@ -146,6 +146,54 @@ From this wallet, we see that the majority of transaction are minute airdrop (le
 
 
 
+These two are the most important transactions that we need to focus on. One is a bulk transaction of 105 XLM to the wallet `GDXK4GJD3342L4FCLMNPIYORSRYEAPLIIAGARWRKDVC5V6X4QO6ILAB6`. While the other one is swap transaction between 
+
+![image1](assets/image2.png)
+
+
+
+
+Usually, in a crypto sweep-and-run operations, the scammers would tend to moves the funds to a different wallet or into fiat currency as soon as possible. This is usually done through a series of transactions to obfuscate the trail.
+
+From this, we see the wallet moved the build of its funds in late 2021 and Early 2022. The bulk of the stolen funds from our original address would have been moved through this batch. 
+
+
+
+
+![image2](assets/image3.png)
+
+
+
+
+From this we observe a pattern, as that the majority of the larger sum (> 100 XLM) movements were transferred to the wallet `GCRAOWEMGUW7N65XLCPRM6W4O4C35T2MJDJFDJEAHMCHAOJXIWZCGVNH`. This wallet belongs to bitgo.com, which is not an exchange but rather a third party crypto custodian service. A bulk of their customers are either institutional investors or high flow exchanges. We are not delving into further of this custodian service. But for further challenges, this might be an interesting point to explore. 
+
+![image4](assets/image4.png)
+
+XLM transactions does allow for memes of a  string encoded using either ASCII or UTF-8, up to 28-bytes long. This is traditionally used by exchanges to encode the transaction ID or customer account numbers. 
+
+the account ID of `103413` is found within the memo for all of the large transactions. 
+
+By filtering all of the transactions with memo containing `103413`, we display out the transactions under the suspicious customer account number.
+
+![image5](assets/image5.png)
+
+
+Finally, we realize that the transaction from 
+`GCX66Z2C2UJ4TPG2JQVBVEBR4BKFIWAUA7KOK75URXENKZ5W2NOZVQXW` is probably suspicious for this CTF challenges. It's the only transaction from 2024 under the `103413` customer ID. Although IRL blockchain forensics would not have been this straightforward...
+
+Finally we've reached the destination and the flag is in the data entries of the wallet. 
+
+![image6](assets/image6.png)
+
+
+    COMPFEST16: e2ZFZF9DaDQxTl9oNFYzX3RoM19sMzQ1N19wcjF2NEN5XzBkN2YwZjMzZmR9
+
+However, this is not the flag. This is a base64 encoded string. 
+
+
+
+#### Flag 
+`COMPFEST16{fEd_Ch41N_h4V3_th3_l3457_pr1v4Cy_0d7f0f33fd}`
 
 
 
