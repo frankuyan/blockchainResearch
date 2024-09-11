@@ -141,6 +141,12 @@ Naturally, once we move over to the Stellar Expert, we can see that the wallet h
 
 ![image](assets/image.png)
 
+From this wallet, we see that the majority of transaction are minute airdrop (less than 0.01 XLM) from exchange wallets. Notably, most of these source addresses have been marked as "Scam" by the Stellar community. This suggests that the owner has pretty bad OPSEC and tend the take the bait from crypto charlatans.
+
+
+
+
+
 
 
 
