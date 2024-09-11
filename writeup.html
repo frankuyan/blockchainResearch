@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>writeup.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="write-up-for-the-challenge-crypto-osint-blockchain">Write up for the challenge [Crypto] [OSINT] [Blockchain]</h2>
+<h3 id="what-are-some-of-the-tools-required-to-solve-this-challenge">What are some of the tools required to solve this challenge?</h3>
+<ol>
+<li>stellar_sdk -- Python SDK for Stellar XLM blockchain. Necessary for interacting with the blockchain for this challenge.</li>
+<li>stellar-sdk-py -- Another Python SDK for Stellar XLM blockchain.</li>
+<li><a href="https://stellar.expert">Stellar Expert</a> - Most comprehensive tool for Stellar XLM blockchain. Does have transaction history, memo information, distributed ledger state and more. The most useful thing would be a graph of the balance of the wallet over time.</li>
+<li><a href="https://stellarscan.io/">Stellar Blockchain Explorer</a> - This is not very good compared to the Stellar Expert, might be more useful if you want to explore the individual transactions.</li>
+<li>Other blockchain osint resources on GitHub
+<ul>
+<li><a href="https://github.com/OffcierCia/On-Chain-Investigations-Tools-List">Awesome On-Chain Investigations HandBook</a></li>
+<li><a href="https://github.com/aaarghhh/awesome_osint_blockchain_analysis">WEB3, CRIPTOCURRENCIES and NFT resources for OSINT investigations</a></li>
+<li><a href="https://github.com/s0md3v/Orbit">Blockchain Transactions Investigation Tool</a> - I haven't tested this out personally, but it might be worthwhile in exploring this for larger scale (or high level OSINT blockchain challenges)</li>
+</ul>
+</li>
+</ol>
+<h3 id="compfest-16---open-wallet-blockchain">COMPFEST 16 - Open Wallet [Blockchain]</h3>
+<h3 id="description">Description</h3>
+<p>Oh no, I accidentally pushed my secret key on github while developing an arbitrage bot, Now my money is stolen 😭😭😭. Can you help me identify who stole my money? Here is the file i pushed https://github.com/Firdausfarul/Neptunus/blob/master/interleave_testnet_backend/Arbitrageur_XLM_USDC.py . the flag is in blockchain, in one of the thief account.</p>
+<p>Author: fahrul</p>
+<p>The script reveals the private key of the wallet, along with some other transaction functions.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> base64
+
+<span class="hljs-keyword">import</span> stellar_sdk
+<span class="hljs-keyword">from</span> stellar_sdk <span class="hljs-keyword">import</span> Keypair,Server, TransactionBuilder, Network, Signer, Asset, xdr
+<span class="hljs-keyword">import</span> requests
+
+
+secret_key=<span class="hljs-string">'SDW5NLCZJEXYK3RNXVZLAPZDMKQNYRVPKZUOFUYBNH4SYNSCJWECSISD'</span>
+acc=Keypair.from_secret(secret_key)
+
+server = Server(<span class="hljs-string">"https://horizon.stellar.org"</span>)
+base_fee = server.fetch_base_fee()*<span class="hljs-number">100</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):
+    response1 = requests.get(<span class="hljs-string">'https://horizon.stellar.org/paths/strict-send?destination_assets=yXLM%3AGARDNV3Q7YGT4AKSDF25LT32YSCCW4EV22Y2TV3I2PU2MMXJTEDL5T55&amp;source_asset_type=native&amp;source_amount=1'</span>)
+    resp1  =response1.json()
+    path = resp1[<span class="hljs-string">'_embedded'</span>][<span class="hljs-string">'records'</span>][<span class="hljs-number">0</span>][<span class="hljs-string">'path'</span>]
+    path_fr1=[]
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(path)):
+        path_fr1.append((Asset(path[i][<span class="hljs-string">'asset_code'</span>], path[i][<span class="hljs-string">'asset_issuer'</span>] )))
+    response2 = requests.get(<span class="hljs-string">'https://horizon.stellar.org/paths/strict-send?destination_assets=yXLM%3AGARDNV3Q7YGT4AKSDF25LT32YSCCW4EV22Y2TV3I2PU2MMXJTEDL5T55&amp;source_asset_type=native&amp;source_amount=1'</span>)
+    resp2  =response2.json()
+    path = resp2[<span class="hljs-string">'_embedded'</span>][<span class="hljs-string">'records'</span>][<span class="hljs-number">0</span>][<span class="hljs-string">'path'</span>]
+    path_fr2=[]
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(path)):
+        path_fr2.append((Asset(path[i][<span class="hljs-string">'asset_code'</span>], path[i][<span class="hljs-string">'asset_issuer'</span>] )))
+
+    stellar_account1 = server.load_account(acc.public_key)
+
+    Transaction2 = (
+        TransactionBuilder(
+            source_account=stellar_account1,
+            network_passphrase=Network.PUBLIC_NETWORK_PASSPHRASE,
+            base_fee=base_fee,
+        )
+            .append_path_payment_strict_send_op(
+            destination=acc.public_key,
+            send_code=<span class="hljs-string">'yXLM'</span>,
+            send_issuer=<span class="hljs-string">'GARDNV3Q7YGT4AKSDF25LT32YSCCW4EV22Y2TV3I2PU2MMXJTEDL5T55'</span>,
+            send_amount=<span class="hljs-string">'1'</span>,
+            dest_code=<span class="hljs-string">'XLM'</span>,
+            dest_issuer=<span class="hljs-literal">None</span>,
+            dest_min=<span class="hljs-string">'1'</span>,
+            path=path_fr2
+        )
+            .build()
+    )
+
+    stellar_account1.sequence += <span class="hljs-number">1</span>
+    Transaction1 = (
+        TransactionBuilder(
+            source_account=stellar_account1,
+            network_passphrase=Network.PUBLIC_NETWORK_PASSPHRASE,
+            base_fee=base_fee,
+        )
+            .append_path_payment_strict_send_op(
+            destination=acc.public_key,
+            send_code=<span class="hljs-string">'XLM'</span>,
+            send_issuer=<span class="hljs-literal">None</span>,
+            send_amount=<span class="hljs-string">'1'</span>,
+            dest_code=<span class="hljs-string">'yXLM'</span>,
+            dest_issuer=<span class="hljs-string">'GARDNV3Q7YGT4AKSDF25LT32YSCCW4EV22Y2TV3I2PU2MMXJTEDL5T55'</span>,
+            dest_min=<span class="hljs-string">'1'</span>,
+            path=path_fr1
+        )
+            .build()
+    )
+
+
+    <span class="hljs-comment"># Signing+Submitting Transaction1</span>
+    Transaction1.sign(acc.secret)
+    Transaction2.sign(acc.secret)
+    response1 = server.submit_transaction(Transaction2)
+    response2 = server.submit_transaction(Transaction1)
+    print(response1)
+    print(response2)
+
+
+</div></code></pre>
+<h3 id="write-up">Write up</h3>
+<p>The first step would be to attain the public wallet address from this challenge. This can be attain once you have a private key.</p>
+<p>This is just simply.</p>
+<pre class="hljs"><code><div>
+secret_key=<span class="hljs-string">'SDW5NLCZJEXYK3RNXVZLAPZDMKQNYRVPKZUOFUYBNH4SYNSCJWECSISD'</span>
+acc=Keypair.from_secret(secret_key)
+print(acc.public_key)
+
+</div></code></pre>
+<p>Which prints out the public wallet address <code>GCVMRAQGQZ5VNX7KUT2O6N2SKQR3ENT2Q2JTRL2YBPSQAPXIRZR2BY23</code></p>
+<p>Naturally, once we move over to the Stellar Expert, we can see that the wallet has made a few transactions. As the challenge wanted us to focus on the nefarious outward tranactions, we do notice some that have taken place in the fall of 2021.</p>
+<p><img src="assets/image.png" alt="image"></p>
+<p>From this wallet, we see that the majority of transaction are minute airdrop (less than 0.01 XLM) from exchange wallets. Notably, most of these source addresses have been marked as &quot;Scam&quot; by the Stellar community. This suggests that the owner has pretty bad OPSEC and tend the take the bait from crypto charlatans.</p>
+<p>These two are the most important transactions that we need to focus on. One is a bulk transaction of 105 XLM to the wallet <code>GDXK4GJD3342L4FCLMNPIYORSRYEAPLIIAGARWRKDVC5V6X4QO6ILAB6</code>. While the other one is swap transaction between</p>
+<p><img src="assets/image2.png" alt="image1"></p>
+<p>Usually, in a crypto sweep-and-run operations, the scammers would tend to moves the funds to a different wallet or into fiat currency as soon as possible. This is usually done through a series of transactions to obfuscate the trail.</p>
+<p>From this, we see the wallet moved the build of its funds in late 2021 and Early 2022. The bulk of the stolen funds from our original address would have been moved through this batch.</p>
+<p><img src="assets/image3.png" alt="image2"></p>
+<p>From this we observe a pattern, as that the majority of the larger sum (&gt; 100 XLM) movements were transferred to the wallet <code>GCRAOWEMGUW7N65XLCPRM6W4O4C35T2MJDJFDJEAHMCHAOJXIWZCGVNH</code>. This wallet belongs to bitgo.com, which is not an exchange but rather a third party crypto custodian service. A bulk of their customers are either institutional investors or high flow exchanges. We are not delving into further of this custodian service. But for further challenges, this might be an interesting point to explore.</p>
+<p><img src="assets/image4.png" alt="image4"></p>
+<p>XLM transactions does allow for memes of a  string encoded using either ASCII or UTF-8, up to 28-bytes long. This is traditionally used by exchanges to encode the transaction ID or customer account numbers.</p>
+<p>the account ID of <code>103413</code> is found within the memo for all of the large transactions.</p>
+<p>By filtering all of the transactions with memo containing <code>103413</code>, we display out the transactions under the suspicious customer account number.</p>
+<p><img src="assets/image5.png" alt="image5"></p>
+<p>Finally, we realize that the transaction from
+<code>GCX66Z2C2UJ4TPG2JQVBVEBR4BKFIWAUA7KOK75URXENKZ5W2NOZVQXW</code> is probably suspicious for this CTF challenges. It's the only transaction from 2024 under the <code>103413</code> customer ID. Although IRL blockchain forensics would not have been this straightforward...</p>
+<p>Finally we've reached the destination and the flag is in the data entries of the wallet.</p>
+<p><img src="assets/image6.png" alt="image6"></p>
+<pre><code>COMPFEST16: e2ZFZF9DaDQxTl9oNFYzX3RoM19sMzQ1N19wcjF2NEN5XzBkN2YwZjMzZmR9
+</code></pre>
+<p>However, this is not the flag. This is a base64 encoded string.</p>
+<h4 id="flag">Flag</h4>
+<p><code>COMPFEST16{fEd_Ch41N_h4V3_th3_l3457_pr1v4Cy_0d7f0f33fd}</code></p>
+
+</body>
+</html>
