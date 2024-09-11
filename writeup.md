@@ -126,7 +126,7 @@ This is just simply.
 
 ``` python
 
-secret_key='SDW5NLCZJEXYK3RNXVZLAPZDMKQNYRVPKZUOFUYBNH4SYNSCJWECSISD'
+secret_key='SDW5NLCZJEXY***************************'
 acc=Keypair.from_secret(secret_key)
 print(acc.public_key)
 
